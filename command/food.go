@@ -2,7 +2,9 @@ package command
 
 import (
 	"net/http"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/djimenez/iconv-go"
@@ -61,8 +63,12 @@ func angel() []string {
 	// add title
 	r = append(r, "Ponudba v Piceriji Angel:")
 
+	// get right class selector from day of week
+	dow := int(time.Now().Weekday()) - 1
+	cls := ".show-" + strconv.Itoa(dow)
+
 	// get div for first day
-	doc.Find(".show-0").Each(func(i int, d *goquery.Selection) {
+	doc.Find(cls).Each(func(i int, d *goquery.Selection) {
 		d.Find("p").Each(func(i int, p *goquery.Selection) {
 			html, err := p.Html()
 			if err != nil {
