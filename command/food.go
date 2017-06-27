@@ -26,6 +26,8 @@ func Menu() Command {
 			out = angel()
 		case "hisa":
 			out = dobrahisa()
+		case "menza":
+			out = menza()
 		default:
 			out = append(out, "Don't know "+args[1]+"!")
 		}
@@ -34,7 +36,6 @@ func Menu() Command {
 }
 
 func angel() []string {
-	// out variable
 	r := []string{}
 
 	// url for Dobra Hisa
@@ -94,7 +95,6 @@ func angel() []string {
 }
 
 func dobrahisa() []string {
-	// out variable
 	r := []string{}
 
 	// url for Dobra Hisa
@@ -133,6 +133,35 @@ func dobrahisa() []string {
 
 		// append menu to output
 		r = append(r, s...)
+	})
+
+	return r
+}
+
+func menza() []string {
+	r := []string{}
+
+	// url for Menza
+	url := "http://www.menza-ljubljana.si/jedilnik/"
+
+	// get document
+	doc, err := goquery.NewDocument(url)
+	if err != nil {
+		r = append(r, err.Error())
+		return r
+	}
+
+	// add title
+	r = append(r, "Ponudba v Menzi:")
+
+	// get div for day0
+	doc.Find(".jedilnik").Each(func(i int, div *goquery.Selection) {
+		div.Find("td").Each(func(i int, td *goquery.Selection) {
+			s := td.Find("h3").Text() + " " + td.Find("p").Text()
+
+			// append menu to output
+			r = append(r, s)
+		})
 	})
 
 	return r
