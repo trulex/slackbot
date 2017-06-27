@@ -13,7 +13,7 @@ import (
 // Menu returns food in available restaurants
 func Menu() Command {
 	return NewCommand("menu", func(args ...string) ([]byte, error) {
-		resturant := []string{"angel", "hisa"}
+		resturant := []string{"angel", "hisa", "menza"}
 
 		// check amount of arguments, if restaurant is missing return list
 		if len(args) < 2 {
