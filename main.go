@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io/ioutil"
 	"log"
 	"os"
@@ -40,26 +41,24 @@ func newSlackBot(commands map[string]command.Command) *slackBot {
 }
 
 func main() {
-	// Debug mode off
-	debug := false
+	// Token path
+	tpath := flag.String("tpath", "/etc/slackbot/TOKEN", "token path")
 
-	// Get command line arguments
-	args := os.Args
-	for _, a := range args {
-		if a == "debug" {
-			debug = true
-		}
-	}
+	// Debug mode
+	debug := flag.Bool("debug", false, "debug mode")
+
+	// Parse flags
+	flag.Parse()
 
 	// Get token from file
-	t, err := ioutil.ReadFile("TOKEN")
+	t, err := ioutil.ReadFile(*tpath)
 	if err != nil {
 		log.Printf("error reading slack token %v", err)
 		os.Exit(1)
 	}
 
 	// Convert token to string
-	token := string(t)
+	token := strings.TrimSpace(string(t))
 
 	// Create commands map
 	cmds := make(map[string]command.Command)
@@ -73,7 +72,7 @@ func main() {
 	b := newSlackBot(cmds)
 
 	// Start bot
-	if err := b.start(debug, token); err != nil {
+	if err := b.start(*debug, token); err != nil {
 		log.Printf("error starting bot %v", err)
 		os.Exit(1)
 	}
