@@ -142,7 +142,7 @@ func menza() []string {
 	r := []string{}
 
 	// url for Menza
-	url := "http://www.menza-ljubljana.si/jedilnik/"
+	url := "https://www.studentska-prehrana.si/sl/restaurant/Details/2710"
 
 	// get document
 	doc, err := goquery.NewDocument(url)
@@ -154,15 +154,18 @@ func menza() []string {
 	// add title
 	r = append(r, "Ponudba v Menzi:")
 
-	// get div for day0
-	doc.Find(".jedilnik").Each(func(i int, div *goquery.Selection) {
-		div.Find("td").Each(func(i int, td *goquery.Selection) {
-			s := td.Find("h3").Text() + " " + td.Find("p").Text()
+	doc.Find("#menu-list").Find(".shadow-wrapper").Each(func(i int, div *goquery.Selection) {
+		s := div.Find("h5").Find("strong").Text()
 
-			// append menu to output
-			r = append(r, s)
-		})
+		s = strings.ToLower(s)
+		split := strings.Split(s, " ")
+		// capitalize first word. for some reason first split element is empty string
+		split[1] = strings.Title(split[1])
+		s = strings.Join(split, " ")
+		r = append(r, s)
 	})
+
+	r = append(r, "© 2016 Študentska organizacija Slovenije – Vse pravice pridržane")
 
 	return r
 }
