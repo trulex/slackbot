@@ -96,8 +96,7 @@ func (c *Connector) Start() error {
 		return nil
 	}
 
-	api := slack.New(c.token)
-	api.SetDebug(c.debug)
+	api := slack.New(c.token, slack.OptionDebug(c.debug))
 
 	// test auth
 	_, err := api.AuthTest()
