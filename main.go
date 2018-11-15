@@ -9,8 +9,8 @@ import (
 	"strings"
 	"sync"
 
-	"./command"
-	"./service"
+	"github.com/trulex/slackbot/command"
+	"github.com/trulex/slackbot/service"
 )
 
 var commands = map[string]func() command.Command{
