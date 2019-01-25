@@ -18,6 +18,7 @@ var commands = map[string]func() command.Command{
 	"^time$":  command.Time,
 	"^hello$": command.Hello,
 	"^menu":   command.Menu,
+	"^ban": command.Ban,
 }
 
 type slackBot struct {

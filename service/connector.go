@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/nlopes/slack"
+	"github.com/nlopes/slack@0.5.0"
 )
 
 // Connector is structure of connector

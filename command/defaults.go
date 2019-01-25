@@ -30,3 +30,13 @@ func Time() Command {
 		return []byte("Server time is: " + t), nil
 	})
 }
+
+func Ban() Command {
+	return NewCommand("ban", func(args ...string) (bytes []byte, e error) {
+		if len(args) < 2 {
+			return []byte("ban who?"), nil
+		}
+
+		return []byte(args[1] + " odstrani se pošast"), nil
+	})
+}
