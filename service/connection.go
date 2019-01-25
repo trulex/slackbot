@@ -4,12 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/nlopes/slack"
-	"log"
 	"strings"
 	"sync"
 	"time"
-
-	"github.com/nlopes/slack@0.5.0"
 )
 
 // Connection is struct for connection

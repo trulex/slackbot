@@ -3,8 +3,7 @@ package service
 import (
 	"errors"
 	"sync"
-
-	"github.com/nlopes/slack@0.5.0"
+	"github.com/nlopes/slack"
 )
 
 // Connector is structure of connector
