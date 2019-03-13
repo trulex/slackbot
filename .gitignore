@@ -15,4 +15,7 @@
 .glide/
 
 # Idea folder
-.Idea/
+.idea/
+
+# store your api token in this file
+TOKEN
