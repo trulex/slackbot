@@ -18,3 +18,11 @@ To start slackbot, run following:
 $ slackbot -tpath=/etc/slackbot/TOKEN -debug
 ```
 Where `tpath` is location of your Slack auth token.
+
+## Running with Docker
+```sh
+$ docker build -t resultbot .
+```
+```sh 
+$ docker-compose -f examples/docker-compose.yml up -d
+```
